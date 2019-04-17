@@ -1,14 +1,18 @@
 var compteur = {
     actualiserCouleurs: function () {
         this.colors.forEach(function (value, index) {
-            if (value === "blue") {
-                $("#timer-" + index).addClass("timer_blue alert alert-info");
-                $("#timer-" + index).removeClass("timer_red alert-danger");
+            if (compteur.timers[index] == 0) {
+                $("#timer-" + index).addClass("alert alert-warning");
+                $("#timer-" + index).removeClass("alert-danger alert-info");
             } else {
-                $("#timer-" + index).addClass("timer_red alert alert-danger");
-                $("#timer-" + index).removeClass("timer_blue alert-info");
+                if (value === "blue") {
+                    $("#timer-" + index).addClass("timer_blue alert alert-info");
+                    $("#timer-" + index).removeClass("timer_red alert-danger");
+                } else {
+                    $("#timer-" + index).addClass("timer_red alert alert-danger");
+                    $("#timer-" + index).removeClass("timer_blue alert-info");
+                }
             }
-
         });
     },
     decrementeCompteur: function () {
@@ -16,8 +20,11 @@ var compteur = {
             this.timers[this.current_timer]--;
 
         if (this.timers[this.current_timer] == 0) {
-            if (this.current_timer >= this.timers.length)
+            if (this.current_timer >= this.timers.length) {
+                alert("END!");
+                this.stopCompteur();
                 return;
+            }
             this.current_timer++;
         }
 
@@ -38,8 +45,8 @@ var compteur = {
             $("#timer-" + index).text(value);
         });
     },
-    toggleCurrentTimer: function(){
-        
+    toggleCurrentTimer: function () {
+
         this.colors[this.current_timer] = this.colors[this.current_timer] === "red" ? "blue" : "red";
         console.log(this.colors[this.current_timer]);
         this.actualiserCouleurs();
@@ -77,11 +84,11 @@ $(document).ready(function () {
         e.preventDefault();
         if (compteur.match_has_begun) {
             compteur.stopCompteur();
-            $(this).text("START")
+            $(this).text("Start")
             compteur.match_has_begun = false;
         } else {
             compteur.beginCompteur();
-            $(this).text("STOP")
+            $(this).text("Stop")
             compteur.match_has_begun = true;
         }
 
