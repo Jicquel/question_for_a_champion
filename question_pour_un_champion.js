@@ -60,8 +60,8 @@ var compteur = {
             blue_begins = !blue_begins;
         }
     },
-    timers: [10, 8, 6, 4, 3, 2, 1],
-    colors: ["blue", "red", "blue", "red", "blue", "red", "blue"],
+    timers: [10, 8, 7, 6, 5, 4, 3, 2],
+    colors: ["blue", "red", "blue", "red", "blue", "red", "blue", "red"],
     current_timer: 0,
     interval_id: 0,
     match_has_begun: false
